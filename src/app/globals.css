@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f5f3f1;
+  --bg-alt: #ebe7e1;
+  --surface: #ffffff;
+  --surface-tint: #f5f3f1;
+  --border: #e5e1d8;
+  --border-strong: #d4cec0;
+
+  --ink: #403e3f;
+  --fg: #403e3f;
+  --fg-muted: #726f70;
+  --fg-faint: #8c8b8c;
+
+  --primary: #fe552e;
+  --primary-dark: #c54f34;
+  --primary-soft: #ffe4da;
+  --on-primary: #ffffff;
+
+  --teal: #006884;
+  --teal-dark: #004f66;
+  --teal-soft: #d9f0f4;
+  --on-teal: #ffffff;
+
+  --highlight: #8efcff;
+
+  --success: #219330;
+  --danger: #c0271f;
+  --warning: #b4740e;
+
+  --on-dark: #f3f1ec;
+
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-hanken);
+  --font-mono: var(--font-geist-mono);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-hanken);
+  --font-mono: var(--font-geist-mono);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--highlight);
+  color: var(--ink);
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Highlighted/marker headline text, CloudZero-style */
+.marker {
+  background: var(--highlight);
+  padding: 0 0.12em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.marker-solid {
+  background: var(--primary);
+  color: var(--on-primary);
+  padding: 0 0.18em;
+  border-radius: 4px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Decorative isometric cube field, flanking the hero */
+.cube-field {
+  position: absolute;
+  top: 0;
+  width: 240px;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.55;
+  background-image: linear-gradient(
+      30deg,
+      color-mix(in srgb, var(--border-strong) 90%, transparent) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      color-mix(in srgb, var(--border-strong) 90%, transparent) 87.5%,
+      color-mix(in srgb, var(--border-strong) 90%, transparent)
+    ),
+    linear-gradient(
+      150deg,
+      color-mix(in srgb, var(--border-strong) 90%, transparent) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      color-mix(in srgb, var(--border-strong) 90%, transparent) 87.5%,
+      color-mix(in srgb, var(--border-strong) 90%, transparent)
+    );
+  background-size: 46px 80px;
+  mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+}
+.cube-field-left {
+  left: 0;
+  mask-image: linear-gradient(
+    to bottom right,
+    transparent,
+    black 20%,
+    black 55%,
+    transparent 85%
+  );
+}
+.cube-field-right {
+  right: 0;
+  mask-image: linear-gradient(
+    to bottom left,
+    transparent,
+    black 20%,
+    black 55%,
+    transparent 85%
+  );
+}
+
+/* Status pills used inside mock UI */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+.pill-success {
+  background: color-mix(in srgb, var(--success) 14%, transparent);
+  color: var(--success);
+}
+.pill-warning {
+  background: color-mix(in srgb, var(--warning) 16%, transparent);
+  color: var(--warning);
+}
+.pill-danger {
+  background: color-mix(in srgb, var(--danger) 14%, transparent);
+  color: var(--danger);
+}
+.pill-neutral {
+  background: var(--surface-tint);
+  color: var(--fg-muted);
+}
+.pill-teal {
+  background: var(--teal-soft);
+  color: var(--teal-dark);
+}
